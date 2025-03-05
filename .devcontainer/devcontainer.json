@@ -1,0 +1,46 @@
+{
+  "name": "devcontainer",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "runArgs": [
+    "--name=devcontainer",
+    "--network=host"
+  ],
+  "mounts": [
+    "source=${localEnv:HOME}/.kube,target=/root/.kube,type=bind,consistency=cached",
+  ],
+  "containerEnv": {
+    "HTTP_PROXY": "${localEnv:HTTP_PROXY}",
+    "HTTPS_PROXY": "${localEnv:HTTP_PROXY}",
+    "http_proxy": "${localEnv:HTTP_PROXY}",
+    "https_proxy": "${localEnv:HTTP_PROXY}",
+    "no_proxy": "${localEnv:NO_PROXY}",
+    "NO_PROXY": "${localEnv:NO_PROXY}"  },
+  "remoteUser": "root",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnPaste": true,
+        "editor.formatOnSave": true,
+        "editor.formatOnSaveMode": "file",
+        "editor.formatOnType": true,
+        "editor.tabSize": 4,
+        // "http.proxy": "",
+        // "https.proxy": "",
+        "terminal.integrated.inheritEnv": true,
+        "[yaml]": {
+          "editor.tabSize": 2
+        },
+        "[tf]": {
+          "editor.tabSize": 2
+        }
+      },
+      "extensions": [
+        "hashicorp.terraform",
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "redhat.vscode-yaml"
+      ]
+    }
+  }
+}
